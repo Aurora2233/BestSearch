@@ -37,7 +37,6 @@ interface props {
 const Page = ({ data }: any) => {
   let xAxis = data.search_msv.map((item: any) => item.date);
   let seriesData = data.search_msv.map((item: any) => item.sv);
-  console.log(xAxis);
 
   const options = {
     xAxis: {
@@ -47,6 +46,9 @@ const Page = ({ data }: any) => {
     },
     yAxis: {
       type: "value",
+    },
+    grid: {
+      containLabel: true,
     },
     series: [
       {
@@ -80,31 +82,18 @@ let Results = () => {
         </Grid>
         {loading ? (
           <Grid container spacing={3}>
-            <Grid item lg={3} xs={8} sm={12}>
-              <Skeleton />
-              <Skeleton animation="wave" />
-              <Skeleton variant="rect" height={200} />
-            </Grid>
-            <Grid item lg={3} xs={8} sm={12}>
-              <Skeleton />
-              <Skeleton animation="wave" />
-              <Skeleton variant="rect" height={200} />
-            </Grid>
-            <Grid item lg={3} xs={8} sm={12}>
-              <Skeleton />
-              <Skeleton animation="wave" />
-              <Skeleton variant="rect" height={200} />
-            </Grid>
-            <Grid item lg={3} xs={8} sm={12}>
-              <Skeleton />
-              <Skeleton animation="wave" />
-              <Skeleton variant="rect" height={200} />
-            </Grid>
+            {[0, 1, 2, 3, 4, 5].map((item) => (
+              <Grid item xs={12} sm={6} md={4} key={item}>
+                <Skeleton />
+                <Skeleton animation="wave" />
+                <Skeleton variant="rect" height={200} />
+              </Grid>
+            ))}
           </Grid>
         ) : (
           <Grid container spacing={3}>
             {data.map((item: any, index: number) => (
-              <Grid item lg={3} xs={8} sm={12} key={index}>
+              <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card className={classes.root}>
                   <CardContent>
                     <Typography variant="h5" component="h2">
