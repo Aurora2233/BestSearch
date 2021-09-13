@@ -12,7 +12,7 @@ interface props {
 let Input = () => {
   const dispatch = useAppDispatch();
   let { id } = useParams<props>();
-  let val = id;
+  let val = id || "";
   const [name, setName] = useState(val);
   let History = useHistory();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
