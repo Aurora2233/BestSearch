@@ -1,24 +1,44 @@
 import {  createSlice, PayloadAction ,  } from '@reduxjs/toolkit';
 
-export interface CounterState {
+export interface productInfo {
+  published_at: string,
+  id: string,
+  title: string,
+  price: string,
+  store_domain: string,
+  image: string
+}
+
+export interface searchState {
   value:string,
   showInput: boolean,
   data:Array<string>
+  productList: Array<string>
+  productInfo: productInfo | undefined
+
 }
 
-const initialState: CounterState = {
+const initialState: searchState = {
   showInput: false,
+  productList:[],
   data: [],
+  productInfo:undefined,
   value:''
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const searchSlice = createSlice({
+  name: 'search',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     GET_DATA: (state,action:PayloadAction<Array<string>>) => {
         state.data= action.payload
+    },
+    GET_PRODUCTS: (state,action:PayloadAction<Array<string>>) => {
+      state.productList= action.payload
+    },
+    GET_PRODUCTINFO: (state,action:PayloadAction<productInfo|undefined>) => {
+      state.productInfo= action.payload
     },
     SHOW_INPUT: (state,action:PayloadAction<boolean>) => {
       state.showInput = action.payload
@@ -33,9 +53,9 @@ export const counterSlice = createSlice({
 
 
 
-export const { SHOW_INPUT,GET_DATA ,SET_VALUE} = counterSlice.actions;
+export const { SHOW_INPUT,GET_DATA ,SET_VALUE,GET_PRODUCTS,GET_PRODUCTINFO} = searchSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 
-export default counterSlice.reducer;
+export default searchSlice.reducer;

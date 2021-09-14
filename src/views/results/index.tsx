@@ -83,7 +83,7 @@ let Results = () => {
   let { id } = useParams<props>();
   const dispatch = useAppDispatch();
   let {
-    counter: { data },
+    search: { data },
   } = store.getState();
 
   useEffect(() => {

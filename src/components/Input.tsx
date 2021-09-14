@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Search from "@material-ui/icons/Search";
 import { TextField, Button } from "@material-ui/core";
-import { getdata } from "../store/actions/index";
-import { useAppDispatch } from "../store/hooks";
+import { getProducts } from "src/store/actions/index";
+import { useAppDispatch } from "src/store/hooks";
 import { useParams } from "react-router-dom";
 import "./index.css";
 interface props {
-  id: string;
+  keyword: string;
 }
 let Input = () => {
   const dispatch = useAppDispatch();
-  let { id } = useParams<props>();
-  let val = id || "";
+  let { keyword } = useParams<props>();
+  let val = keyword || "";
   const [name, setName] = useState(val);
   let History = useHistory();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,15 +21,15 @@ let Input = () => {
   function onkeydown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Enter" && !!name) {
       let value = name.replace(/\s/g, "+");
-      getdata(dispatch, value);
-      History.push(`/${value}`);
+      getProducts(dispatch, value);
+      History.push(`/search/${value}`);
     }
   }
   function handleSearch() {
     if (name) {
       let value = name.replace(/\s/g, "+");
-      getdata(dispatch, value);
-      History.push(`/${value}`);
+      getProducts(dispatch, value);
+      History.push(`/search/${value}`);
     }
   }
   return (

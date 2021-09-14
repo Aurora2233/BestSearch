@@ -4,6 +4,8 @@ import { ThemeProvider } from "@material-ui/styles";
 import { store } from "src/store/index";
 import Home from "src/views/home/index";
 import Results from "src/views/results/index";
+import product from "src/views/product/index";
+import productInfo from "src/views/productInfo/index";
 import withSubscription from "src/views/page/index";
 import "./App.css";
 import { Provider } from "react-redux";
@@ -26,6 +28,8 @@ const theme = createTheme({
 // let DEMO = Page(Home);
 const Page = withSubscription(Home, true);
 const Result = withSubscription(Results, false);
+const Produst = withSubscription(product, false);
+const Info = withSubscription(productInfo, false);
 function App() {
   return (
     <Provider store={store}>
@@ -33,8 +37,14 @@ function App() {
         <Route exact path="/">
           <Page />
         </Route>
-        <Route path="/:id">
+        {/* <Route path="/:id">
           <Result />
+        </Route> */}
+        <Route path="/search/:keyword">
+          <Produst />
+        </Route>
+        <Route path="/product/:id">
+          <Info />
         </Route>
       </ThemeProvider>
     </Provider>
