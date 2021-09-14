@@ -8,7 +8,6 @@ import ReactECharts from "echarts-for-react";
 import {
   Typography,
   Card,
-  CardActions,
   CardContent,
   Grid,
   Container,
@@ -17,7 +16,10 @@ import {
 import { Skeleton } from "@material-ui/lab";
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    Width: 275,
+  },
+  ratio: {
+    marginTop: "20px",
   },
   bullet: {
     display: "inline-block",
@@ -27,8 +29,16 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
+  date: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "10px",
+  },
+});
+const chartsStyles = makeStyles({
+  chart: {
+    height: "150px",
   },
 });
 interface props {
@@ -37,18 +47,26 @@ interface props {
 const Page = ({ data }: any) => {
   let xAxis = data.search_msv.map((item: any) => item.date);
   let seriesData = data.search_msv.map((item: any) => item.sv);
-
+  let classes = chartsStyles();
   const options = {
     xAxis: {
+      show: false,
       type: "category",
       boundaryGap: false,
       data: xAxis,
     },
     yAxis: {
+      show: false,
       type: "value",
     },
+    axisLine: {
+      show: false,
+    },
     grid: {
-      containLabel: true,
+      top: "0",
+      left: "0",
+      right: "0",
+      bottom: "0",
     },
     series: [
       {
@@ -58,7 +76,7 @@ const Page = ({ data }: any) => {
       },
     ],
   };
-  return <ReactECharts option={options} />;
+  return <ReactECharts className={classes.chart} option={options} />;
 };
 let Results = () => {
   let [loading, setloading] = useState(true);
@@ -82,8 +100,8 @@ let Results = () => {
         </Grid>
         {loading ? (
           <Grid container spacing={3}>
-            {[0, 1, 2, 3, 4, 5].map((item) => (
-              <Grid item xs={12} sm={6} md={4} key={item}>
+            {[0, 1, 2, 3].map((item) => (
+              <Grid item xs={12} sm={6} md={3} key={item}>
                 <Skeleton />
                 <Skeleton animation="wave" />
                 <Skeleton variant="rect" height={200} />
@@ -93,22 +111,22 @@ let Results = () => {
         ) : (
           <Grid container spacing={3}>
             {data.map((item: any, index: number) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid item xs={12} sm={6} md={3} key={index}>
                 <Card className={classes.root}>
                   <CardContent>
                     <Typography variant="h5" component="h2">
                       {item.name}
                     </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    <Typography className={classes.ratio} color="textSecondary">
                       Growth {item.yoy}%
                     </Typography>
-                    <Typography variant="body2" component="div">
+                    <Typography component="div">
                       <Page data={item} />
                     </Typography>
+                    <Typography className={classes.date} component="span">
+                      {item.created_at} - {item.updated_at}
+                    </Typography>
                   </CardContent>
-                  <CardActions>
-                    {item.created_at}~{item.updated_at}
-                  </CardActions>
                 </Card>
               </Grid>
             ))}

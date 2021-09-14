@@ -2,11 +2,6 @@
   background-color: #FCF7EE;
   min-height: 100vh;
 }
-.bar{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
 .Title{
   font-size: 30px;
   color: #000;

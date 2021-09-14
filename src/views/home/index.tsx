@@ -4,8 +4,8 @@ import Input from "src/components/Input";
 import "./index.css";
 const useStyles = makeStyles((theme) => ({
   SearchTitle: {
-    fontSize: "40px",
-    marginBottom: "10px",
+    fontSize: "60px",
+    margin: "5vh 0",
     width: "100%",
     textAlign: "center",
   },

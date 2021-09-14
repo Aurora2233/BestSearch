@@ -5,21 +5,19 @@ import "./index.css";
 function withSubscription<T>(Component: React.ComponentType<T>, show: boolean) {
   return (props: T) => (
     <>
-      <header className="app-header">
-        <AppBar position="sticky" color="primary">
-          <Toolbar className="bar">
-            <Link href="/" underline="none">
-              <Box component="span" fontWeight={500} className="Title">
-                Best
-              </Box>
-              <Box component="span" fontWeight={300} className="Title">
-                Search
-              </Box>
-            </Link>
-            {show ? null : <Input />}
-          </Toolbar>
-        </AppBar>
-      </header>
+      <AppBar position="sticky" id="Bar" color="primary">
+        <Toolbar className="bar">
+          <Link href="/" underline="none">
+            <Box component="span" fontWeight={600} className="Title">
+              Best
+            </Box>
+            <Box component="span" className="Title">
+              Search
+            </Box>
+          </Link>
+          {show ? null : <Input />}
+        </Toolbar>
+      </AppBar>
       <div className="app-body">
         <Component {...props} />
       </div>
