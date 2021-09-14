@@ -1,5 +1,5 @@
 import { Box, AppBar, Toolbar, Link } from "@material-ui/core";
-import Input from "../../components/Input";
+import Input from "src/components/Input";
 import "./index.css";
 
 function withSubscription<T>(Component: React.ComponentType<T>, show: boolean) {
@@ -23,7 +23,6 @@ function withSubscription<T>(Component: React.ComponentType<T>, show: boolean) {
       <div className="app-body">
         <Component {...props} />
       </div>
-      {/* <footer className="app-footer">...</footer> */}
     </>
   );
 }

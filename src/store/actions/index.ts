@@ -1,7 +1,7 @@
 import { getData } from '../../api/index'
 import { GET_DATA,SHOW_INPUT,SET_VALUE } from "../counterSlice";
-
-export const getdata = async (dispatch: any, value: string) => {
+import type { AppDispatch} from '../index'
+export const getdata = async (dispatch: AppDispatch, value: string) => {
         let params ={
             "login_token": "INTERVIEW_SIMPLY2021",
             "search_phrase": value
@@ -17,6 +17,6 @@ export const getdata = async (dispatch: any, value: string) => {
         await dispatch(SET_VALUE(value))
         await dispatch(GET_DATA(product_trends))
 }
-export const showInput = async (dispatch: any, value: string) => {
+export const showInput = async (dispatch: AppDispatch, value: string) => {
     await dispatch(SHOW_INPUT(!!value))
 }

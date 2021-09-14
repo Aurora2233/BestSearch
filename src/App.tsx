@@ -1,11 +1,11 @@
 import { Route } from "react-router-dom";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import Home from "./views/home/index";
-import Results from "./views/results/index";
-import withSubscription from "./views/page/index";
+import { store } from "src/store/index";
+import Home from "src/views/home/index";
+import Results from "src/views/results/index";
+import withSubscription from "src/views/page/index";
 import "./App.css";
-import { store } from "./store/index";
 import { Provider } from "react-redux";
 const theme = createTheme({
   palette: {

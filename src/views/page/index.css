@@ -1,7 +1,9 @@
 .app-body{
-    margin-top:50px;
-    height: auto;
     display: flex;
+    min-height: calc(100vh - 64px);
+    justify-content: center;
+    align-items: center;
+    background-color: #FAF7EE;
 }
 .Container{
     display: flex;

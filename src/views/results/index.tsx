@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { store } from "../../store/index";
+import { useState, useEffect } from "react";
+import { store } from "src/store/index";
 import { makeStyles } from "@material-ui/core/styles";
-import { getdata } from "../../store/actions/index";
-import { useAppDispatch } from "../../store/hooks";
+import { getdata } from "src/store/actions/index";
+import { useAppDispatch } from "src/store/hooks";
 import { useParams } from "react-router-dom";
 import ReactECharts from "echarts-for-react";
 import {
@@ -69,7 +69,7 @@ let Results = () => {
   } = store.getState();
 
   useEffect(() => {
-    getdata(dispatch, id).then((res) => {
+    getdata(dispatch, id).then((res: any) => {
       setloading(!!data.length);
     });
   }, []);

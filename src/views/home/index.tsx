@@ -1,11 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import Input from "../../components/Input";
+import Input from "src/components/Input";
 import "./index.css";
 const useStyles = makeStyles((theme) => ({
   SearchTitle: {
     fontSize: "40px",
-    marginBottom: "100px",
+    marginBottom: "10px",
+    width: "100%",
+    textAlign: "center",
   },
 }));
 let Home = () => {
