@@ -13,7 +13,6 @@ import {
   Box,
   CardActionArea,
   CardMedia,
-  Link,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 const useStyles = makeStyles({
@@ -46,7 +45,7 @@ const useStyles = makeStyles({
     lineClamp: 2,
   },
   publishedTime: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#878787",
   },
   price: {
@@ -64,23 +63,21 @@ const useStyles = makeStyles({
   },
 });
 interface props {
-  keyword: string;
+  id: string;
 }
-let Results = () => {
-  let History = useHistory();
-  let [loading, setloading] = useState(true);
+let Puducts = () => {
+  const History = useHistory();
   const dispatch = useAppDispatch();
-  let { keyword } = useParams<props>();
-  let {
+  const { id } = useParams<props>();
+  const {
     search: { productList },
   } = store.getState();
-
-  console.log(productList);
+  let [loading, setloading] = useState(true);
   useEffect(() => {
-    getProducts(dispatch, keyword).then((res: any) => {
-      setloading(!!productList.length);
+    getProducts(dispatch, id).then((res: any) => {
+      setloading(false);
     });
-  }, []);
+  }, [productList]);
   function toPuducts(val: string) {
     History.push({ pathname: `/product/${val}`, state: { param: val } });
   }
@@ -153,4 +150,4 @@ let Results = () => {
     </>
   );
 };
-export default Results;
+export default Puducts;

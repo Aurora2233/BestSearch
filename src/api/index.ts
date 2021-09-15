@@ -4,7 +4,7 @@ interface data {
 }
 interface infoParamType {
     login_token: string,
-    id:string
+    id:number
 }
 export let getData = (data:data) => {
     return fetch("http://3.141.23.218:5000/interview/keyword_search", {

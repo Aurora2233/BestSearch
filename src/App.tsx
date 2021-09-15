@@ -40,10 +40,10 @@ function App() {
         {/* <Route path="/:id">
           <Result />
         </Route> */}
-        <Route path="/search/:keyword">
+        <Route path="/search/:id">
           <Produst />
         </Route>
-        <Route path="/product/:id">
+        <Route path="/product/:productId">
           <Info />
         </Route>
       </ThemeProvider>

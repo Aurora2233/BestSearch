@@ -3,7 +3,8 @@ import { store } from "src/store/index";
 import { makeStyles } from "@material-ui/core/styles";
 import { getInfo } from "src/store/actions/index";
 import { useAppDispatch } from "src/store/hooks";
-import { useParams } from "react-router-dom";
+import Product from "src/views/product/index";
+import { useParams, useLocation } from "react-router-dom";
 import {
   Typography,
   Card,
@@ -13,103 +14,121 @@ import {
   Box,
   CardActionArea,
   CardMedia,
+  Link,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 const useStyles = makeStyles({
-  root: {
-    Width: 275,
+  Container: {
+    marginTop: "5vh",
+  },
+  header: {
+    width: "100%",
+    display: "flex",
   },
   image: {
-    height: 300,
-    borderBlock: "1px solid #e1e1e1",
-  },
-  text: {
-    color: "#878787",
-  },
-  keyword: {
-    fontWeight: "bold",
-  },
-  domain: {
-    color: "#878787",
-    fontSize: 14,
-  },
-  Content: {
-    height: 150,
+    width: 500,
+    height: 500,
   },
   title: {
-    fontSize: 18,
-    maxHeight: 60,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    boxOrient: "vertical",
-    lineClamp: 2,
-  },
-  publishedTime: {
-    fontSize: 18,
-    color: "#878787",
+    fontSize: 22,
+    fontWeight: "bold",
   },
   price: {
-    margin: "10px 0",
-    color: "#878787",
+    color: "#999",
   },
-  date: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "10px",
+  time: {
+    fontSize: 16,
   },
-  rect: {
+  link: {
     marginBottom: 10,
+    textDecoration: "underline",
+    color: "#999",
   },
 });
 interface props {
-  id: string;
+  productId: string;
 }
-let Results = () => {
+interface Location {
+  state: {
+    param: string;
+  };
+  param: string;
+}
+let Info = () => {
   let [loading, setloading] = useState(true);
+  let [Info, setInfo] = useState({});
   const dispatch = useAppDispatch();
-  let { id } = useParams<props>();
-  console.log(id, "id");
+  let { productId } = useParams<props>();
 
   let {
-    search: { productInfo },
+    search: {
+      productInfo = {
+        image: "",
+        title: "",
+        price: "",
+        published: "",
+        store_domain: "",
+      },
+    },
   } = store.getState();
 
-  console.log(productInfo);
   useEffect(() => {
-    getInfo(dispatch, id).then((res: any) => {
-      setloading(!!productInfo);
+    getInfo(dispatch, +productId).then((res: any) => {
+      setloading(false);
+      setInfo(productInfo);
     });
-  }, []);
+  }, [productId]);
   const classes = useStyles();
   return (
     <>
-      <Container className="Container">
-        <Grid item xs={12}>
-          <Box component="h3">
-            Related new products published in last 7 days
-          </Box>
-        </Grid>
+      <Container className={classes.Container}>
         {loading ? (
-          <Grid container spacing={3}>
-            {[0, 1, 2, 3].map((item) => (
-              <Grid item xs={12} sm={6} md={3} key={item}>
+          <div>
+            <Box display="flex" alignItems="center">
+              <Box marginRight={10}>
                 <Skeleton
                   variant="rect"
-                  height={300}
-                  className={classes.rect}
-                />
-                <Skeleton variant="rect" height={130} />
-              </Grid>
-            ))}
-          </Grid>
+                  width="500px"
+                  height="500px"
+                ></Skeleton>
+              </Box>
+              <Box width="100%">
+                <Skeleton height={200} width="100%"></Skeleton>
+                <Skeleton width="20%"></Skeleton>
+                <Skeleton width="100%"></Skeleton>
+                <Skeleton width="100%"></Skeleton>
+                <Skeleton width="80%"></Skeleton>
+              </Box>
+            </Box>
+          </div>
         ) : (
-          <Grid container spacing={3}>
-            66
-          </Grid>
+          <div>
+            <Box display="flex" alignItems="center">
+              <Box marginRight={10}>
+                <CardMedia
+                  className={classes.image}
+                  image={productInfo.image}
+                  title="Contemplative Reptile"
+                />
+              </Box>
+              <Box width="100%">
+                <Typography component="p" className={classes.title}>
+                  {productInfo.title}
+                </Typography>
+                <Typography component="p" className={classes.price}>
+                  ${productInfo.price}
+                </Typography>
+                <Typography className={classes.time} component="p">
+                  Published {productInfo.published} dats ago
+                </Typography>
+                <Link className={classes.link}>{productInfo.store_domain}</Link>
+              </Box>
+            </Box>
+          </div>
         )}
+        <Product />
       </Container>
     </>
   );
 };
-export default Results;
+export default Info;

@@ -7,6 +7,7 @@ export interface productInfo {
   price: string,
   store_domain: string,
   image: string
+  published:string
 }
 
 export interface searchState {

@@ -5,30 +5,34 @@ import { TextField, Button } from "@material-ui/core";
 import { getProducts } from "src/store/actions/index";
 import { useAppDispatch } from "src/store/hooks";
 import { useParams } from "react-router-dom";
+import { store } from "src/store/index";
 import "./index.css";
 interface props {
-  keyword: string;
+  id: string;
 }
 let Input = () => {
   const dispatch = useAppDispatch();
-  let { keyword } = useParams<props>();
-  let val = keyword || "";
+  let { id } = useParams<props>();
+  let {
+    search: { value },
+  } = store.getState();
+  let val = value || id || "";
   const [name, setName] = useState(val);
   let History = useHistory();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
-  function onkeydown(event: React.KeyboardEvent<HTMLDivElement>) {
+  async function onkeydown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Enter" && !!name) {
       let value = name.replace(/\s/g, "+");
-      getProducts(dispatch, value);
+      await getProducts(dispatch, value);
       History.push(`/search/${value}`);
     }
   }
-  function handleSearch() {
+  async function handleSearch() {
     if (name) {
       let value = name.replace(/\s/g, "+");
-      getProducts(dispatch, value);
+      await getProducts(dispatch, value);
       History.push(`/search/${value}`);
     }
   }
