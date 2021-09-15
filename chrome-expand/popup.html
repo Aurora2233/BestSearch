@@ -6,33 +6,59 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<style>
-		body {
-			font-family: 'Microsoft Yahei';
-			width: 500px;
-			min-height: 100px;
+		.box{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 600px;
+			height: 500px;
 		}
-
-		a {
-			margin-right: 10px;
+		.box2{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 600px;
+			height: 500px;
+		}
+		#MinPrice,#MaxPrice{
+			font-size: 16px;
+		}
+		.Max{
+			border-right: 1px solid #666;
+		}
+		.Max,.Min{
+			text-align: center;
+			width: 300px;
+		}
+		.MaxImage,.MinImage{
+			width: 200px;
+		}
+		.MinProductName,.MaxProductName{
+			font-size: 18px;
+		}
+		.off{
+			display: none;
 		}
 	</style>
 </head>
 
 <body>
-	<!-- <h2>DOM交互演示</h2>
-	<div>
-		<a href="#" id="update_bg_color">修改页面背景色(通过executeScript实现)</a>
-		<a href="#" id="update_font_size">修改字体大小(通过sendMessage实现)</a>
-	</div> -->
-	<div>
-		<div>
-			<p>当前页面最高价：</p>
-			<spam id="Max"></spam>
+	<div class="box">
+		<div class="Max">
+			<p>当前页面最高价C产品：</p>
+			<img class="MaxImage" src="" alt="数据未加载">
+			<p class="MaxProductName"></p>
+			<p id="MaxPrice"></p>
 		</div>
-		<div>
-			<p>当前页面最低价：</p>
-			<spam id="Min"></spam>
+		<div class="Min">
+			<p>当前页面最低价产品：</p>
+			<img class="MinImage" src="" alt="">
+			<p class="MinProductName"></p>
+			<p id="MinPrice"></p>
 		</div>
+	</div>
+	<div class="box2">
+		<botton id="scroll">加载全部数据</botton>
 	</div>
 	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
