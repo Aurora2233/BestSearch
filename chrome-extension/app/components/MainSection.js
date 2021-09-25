@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import TodoItem from './TodoItem';
+import TodoItem from './TodoItem';
 import Footer from './Footer';
-// import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
+import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
 import style from './MainSection.css';
 
-// const TODO_FILTERS = {
-//   [SHOW_ALL]: () => true,
-//   [SHOW_ACTIVE]: todo => !todo.completed,
-//   [SHOW_COMPLETED]: todo => todo.completed
-// };
+const TODO_FILTERS = {
+  [SHOW_ALL]: () => true,
+  [SHOW_ACTIVE]: todo => !todo.completed,
+  [SHOW_COMPLETED]: todo => todo.completed
+};
 
 export default class MainSection extends Component {
 
@@ -18,10 +18,10 @@ export default class MainSection extends Component {
     actions: PropTypes.object.isRequired
   };
 
-  // constructor(props, context) {
-  //   super(props, context);
-  //   this.state = { filter: SHOW_ALL };
-  // }
+  constructor(props, context) {
+    super(props, context);
+    this.state = { filter: SHOW_ALL };
+  }
 
   handleClearCompleted = () => {
     const atLeastOneCompleted = this.props.todos.some(todo => todo.completed);
@@ -67,25 +67,24 @@ export default class MainSection extends Component {
   }
 
   render() {
-    // const { todos, actions } = this.props;
-    // const { filter } = this.state;
+    const { todos, actions } = this.props;
+    const { filter } = this.state;
 
-    // const filteredTodos = todos.filter(TODO_FILTERS[filter]);
-    // const completedCount = todos.reduce(
-    //   (count, todo) => (todo.completed ? count + 1 : count),
-    //   0
-    // );
+    const filteredTodos = todos.filter(TODO_FILTERS[filter]);
+    const completedCount = todos.reduce(
+      (count, todo) => (todo.completed ? count + 1 : count),
+      0
+    );
 
     return (
       <section className={style.main}>
-        React Web APP
-        {/* {this.renderToggleAll(completedCount)}
+        {this.renderToggleAll(completedCount)}
         <ul className={style.todoList}>
           {filteredTodos.map(todo =>
             <TodoItem key={todo.id} todo={todo} {...actions} />
           )}
         </ul>
-        {this.renderFooter(completedCount)} */}
+        {this.renderFooter(completedCount)}
       </section>
     );
   }
