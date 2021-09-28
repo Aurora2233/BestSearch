@@ -3295,9 +3295,6 @@ var NewFrame = exports.NewFrame = function NewFrame(props) {
     setIsMinimized(!isMinimized);
   };
   (0, _react.useEffect)(function () {
-    console.log(2233);
-  });
-  (0, _react.useEffect)(function () {
     var delay = props.delay,
         onMount = props.onMount;
 
@@ -3324,7 +3321,7 @@ var NewFrame = exports.NewFrame = function NewFrame(props) {
       delete window[FRAME_TOGGLE_FUNCTION];
       clearTimeout(_visibleRenderTimeout);
     };
-  }, []);
+  });
   return _react2.default.createElement(
     'div',
     null,

@@ -96,9 +96,6 @@ export const NewFrame = (props) =>{
     setIsMinimized(!isMinimized)
   }
   useEffect(()=>{
-    console.log(2233);
-  })
-  useEffect(()=>{
     const { delay, onMount } = props
 
     window[FRAME_TOGGLE_FUNCTION] = toggleFrame
@@ -122,7 +119,7 @@ export const NewFrame = (props) =>{
       delete window[FRAME_TOGGLE_FUNCTION]
       clearTimeout(_visibleRenderTimeout)
     }
-  },[])
+  })
   return (
     <div>
     <div
